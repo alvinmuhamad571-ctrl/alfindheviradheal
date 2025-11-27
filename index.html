@@ -3,1034 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>finSpotify - Musik untuk Semua</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Keindahan Mahameru (Gunung Semeru)</title>
+    <!-- Memuat Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root {
-            --spotify-black: #121212;
-            --spotify-base: #181818;
-            --spotify-highlight: #282828;
-            --spotify-text: #FFFFFF;
-            --spotify-text-muted: #B3B3B3;
-            --spotify-green: #1DB954;
-            --fin-blue: #1E3A8A;
-            --fin-blue-light: #3B82F6;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Circular Std', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        }
-
+        /* Mengatur font agar lebih modern dan mudah dibaca */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
         body {
-            background-color: var(--spotify-black);
-            color: var(--spotify-text);
-            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* Biru sangat gelap / Hitam */
         }
-
-        .app-container {
-            display: grid;
-            grid-template-rows: 1fr 90px;
-            height: 100vh;
-        }
-
-        .main-content {
-            display: grid;
-            grid-template-columns: 240px 1fr;
-            overflow: hidden;
-        }
-
-        /* Sidebar Styles */
-        .sidebar {
-            background-color: #000000;
-            padding: 24px 12px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 24px;
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--fin-blue-light);
-        }
-
-        .logo i {
-            font-size: 30px;
-        }
-
-        .nav-section {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            margin-bottom: 24px;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 10px 14px;
-            border-radius: 6px;
-            color: var(--spotify-text-muted);
-            text-decoration: none;
-            transition: background-color 0.2s;
-            cursor: pointer;
-        }
-
-        .nav-item:hover {
-            background-color: var(--spotify-highlight);
-            color: var(--spotify-text);
-        }
-
-        .nav-item.active {
-            background-color: var(--spotify-highlight);
-            color: var(--spotify-text);
-        }
-
-        .nav-item i {
-            width: 24px;
-            font-size: 20px;
-        }
-
-        .library-section {
-            background-color: var(--spotify-highlight);
-            border-radius: 8px;
-            padding: 16px;
-            margin-top: auto;
-        }
-
-        .library-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-        }
-
-        .library-title {
-            font-weight: 700;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-
-        .library-icon {
-            background-color: transparent;
-            border: none;
-            color: var(--spotify-text-muted);
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .playlist-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .playlist-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 8px 0;
-            color: var(--spotify-text-muted);
-            cursor: pointer;
-        }
-
-        .playlist-item:hover {
-            color: var(--spotify-text);
-        }
-
-        .playlist-icon {
-            background-color: var(--spotify-text-muted);
-            color: var(--spotify-base);
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 4px;
-        }
-
-        /* Content Styles */
-        .content {
-            background: linear-gradient(to bottom, #1E3A8A 0%, var(--spotify-base) 250px, var(--spotify-base) 100%);
-            overflow-y: auto;
-            padding: 24px 32px;
-        }
-
-        .content-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-
-        .navigation-buttons {
-            display: flex;
-            gap: 16px;
-        }
-
-        .nav-button {
-            background-color: rgba(0, 0, 0, 0.7);
-            border: none;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--spotify-text);
-            cursor: pointer;
-            opacity: 0.7;
-            transition: opacity 0.2s;
-        }
-
-        .nav-button:hover {
-            opacity: 1;
-        }
-
-        .nav-button:first-child {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        .user-menu {
-            display: flex;
-            align-items: center;
-            background-color: #000000;
-            border-radius: 23px;
-            padding: 4px;
-            cursor: pointer;
-        }
-
-        .user-avatar {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background-color: var(--fin-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 8px;
-        }
-
-        .user-name {
-            padding: 0 14px;
-            font-size: 14px;
-            font-weight: 700;
-            margin-right: 8px;
-        }
-
-        .user-dropdown {
-            color: var(--spotify-text);
-            padding: 0 8px;
-        }
-
         .hero-section {
-            display: flex;
-            align-items: flex-end;
-            margin-bottom: 32px;
-        }
-
-        .hero-image {
-            width: 232px;
-            height: 232px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-            background-color: var(--fin-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 80px;
-            color: var(--spotify-text);
-            background-image: url('https://picsum.photos/seed/finspotify/232/232.jpg');
+            background-image: url('https://placehold.co/1200x800/1e293b/ffffff?text=Gunung+Semeru'); /* Placeholder foto pemandangan Semeru */
             background-size: cover;
             background-position: center;
         }
-
-        .hero-info {
-            margin-left: 24px;
-        }
-
-        .hero-type {
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 8px;
-        }
-
-        .hero-title {
-            font-size: 72px;
-            font-weight: 900;
-            margin-bottom: 16px;
-        }
-
-        .hero-description {
-            font-size: 16px;
-            font-weight: 400;
-            margin-bottom: 24px;
-            max-width: 600px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-        }
-
-        .play-button {
-            background-color: var(--fin-blue-light);
-            color: var(--spotify-text);
-            border: none;
-            border-radius: 500px;
-            padding: 12px 32px;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: background-color 0.2s;
-        }
-
-        .play-button:hover {
-            background-color: #2563EB;
-            transform: scale(1.05);
-        }
-
-        .play-button i {
-            font-size: 18px;
-        }
-
-        .other-button {
-            background-color: transparent;
-            border: none;
-            color: var(--spotify-text);
-            cursor: pointer;
-            font-size: 18px;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.2s;
-        }
-
-        .other-button:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .section {
-            margin-bottom: 40px;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .section-title {
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        .section-link {
-            color: var(--spotify-text-muted);
-            text-decoration: none;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: color 0.2s;
-        }
-
-        .section-link:hover {
-            color: var(--spotify-text);
-            text-decoration: underline;
-        }
-
-        .cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 24px;
-        }
-
-        .card {
-            background-color: var(--spotify-highlight);
-            border-radius: 8px;
-            padding: 16px;
-            transition: background-color 0.3s;
-            cursor: pointer;
-        }
-
-        .card:hover {
-            background-color: var(--spotify-base);
-        }
-
-        .card:hover .play-overlay {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .card-image {
-            width: 100%;
-            aspect-ratio: 1/1;
-            border-radius: 8px;
-            margin-bottom: 16px;
-            background-color: var(--fin-blue);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
-            color: var(--spotify-text);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .play-overlay {
-            position: absolute;
-            bottom: 8px;
-            right: 8px;
-            background-color: var(--fin-blue-light);
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-            opacity: 0;
-            transform: translateY(8px);
+        .interactive-button {
             transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
-
-        .card-title {
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+        .interactive-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
         }
-
-        .card-description {
-            font-size: 12px;
-            color: var(--spotify-text-muted);
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        /* Player Styles */
-        .player {
-            background-color: var(--spotify-base);
-            border-top: 1px solid var(--spotify-highlight);
-            display: grid;
-            grid-template-columns: 1fr 2fr 1fr;
-            padding: 0 16px;
-            align-items: center;
-        }
-
-        .now-playing {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .now-playing-image {
-            width: 56px;
-            height: 56px;
-            background-color: var(--fin-blue);
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: var(--spotify-text);
-            overflow: hidden;
-        }
-
-        .now-playing-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .now-playing-info {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .now-playing-title {
-            font-size: 14px;
-            color: var(--spotify-text);
-        }
-
-        .now-playing-artist {
-            font-size: 11px;
-            color: var(--spotify-text-muted);
-        }
-
-        .now-playing-controls {
-            display: flex;
-            gap: 16px;
-            align-items: center;
-        }
-
-        .control-button {
-            background-color: transparent;
-            border: none;
-            color: var(--spotify-text-muted);
-            cursor: pointer;
-        }
-
-        .control-button:hover {
-            color: var(--spotify-text);
-        }
-
-        .control-button.main {
-            color: var(--spotify-text);
-            font-size: 20px;
-        }
-
-        .progress-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            width: 100%;
-            max-width: 700px;
-        }
-
-        .progress-time {
-            font-size: 11px;
-            color: var(--spotify-text-muted);
-            min-width: 40px;
-        }
-
-        .progress-bar {
-            flex-grow: 1;
-            height: 4px;
-            background-color: var(--spotify-highlight);
-            border-radius: 2px;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .progress {
-            height: 100%;
-            background-color: var(--spotify-text);
-            border-radius: 2px;
-            width: 30%;
-            position: relative;
-        }
-
-        .progress::after {
-            content: '';
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 12px;
-            height: 12px;
-            background-color: var(--spotify-text);
-            border-radius: 50%;
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
-
-        .progress-bar:hover .progress::after {
-            opacity: 1;
-        }
-
-        .player-extras {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 16px;
-        }
-
-        .extra-button {
-            background-color: transparent;
-            border: none;
-            color: var(--spotify-text-muted);
-            cursor: pointer;
-        }
-
-        .extra-button:hover {
-            color: var(--spotify-text);
-        }
-
-        .volume-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .volume-bar {
-            width: 100px;
-            height: 4px;
-            background-color: var(--spotify-highlight);
-            border-radius: 2px;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .volume {
-            height: 100%;
-            background-color: var(--spotify-text);
-            border-radius: 2px;
-            width: 70%;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-
-            .sidebar {
-                display: none;
-            }
-
-            .hero-title {
-                font-size: 48px;
-            }
-
-            .player {
-                grid-template-columns: 1fr;
-                grid-template-rows: repeat(3, 1fr);
-                padding: 8px;
-            }
-
-            .player-extras {
-                display: none;
-            }
+        .glow-effect {
+            text-shadow: 0 0 5px rgba(59, 130, 246, 0.7); /* Efek cahaya biru */
         }
     </style>
 </head>
-<body>
-    <div class="app-container">
-        <div class="main-content">
-            <!-- Sidebar -->
-            <div class="sidebar">
-                <div class="logo">
-                    <i class="fas fa-music"></i>
-                    <span>finSpotify</span>
-                </div>
-                
-                <div class="nav-section">
-                    <a href="#" class="nav-item active">
-                        <i class="fas fa-home"></i>
-                        <span>Beranda</span>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <i class="fas fa-search"></i>
-                        <span>Cari</span>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <i class="fas fa-book"></i>
-                        <span>Perpustakaan Anda</span>
-                    </a>
-                </div>
-                
-                <div class="nav-section">
-                    <a href="#" class="nav-item">
-                        <i class="fas fa-plus-square"></i>
-                        <span>Buat Playlist</span>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <i class="fas fa-heart"></i>
-                        <span>Lagu Disukai</span>
-                    </a>
-                </div>
-                
-                <div class="library-section">
-                    <div class="library-header">
-                        <div class="library-title">Playlist</div>
-                        <button class="library-icon">
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
-                    <div class="playlist-list">
-                        <div class="playlist-item">
-                            <div class="playlist-icon">
-                                <i class="fas fa-music"></i>
-                            </div>
-                            <span>Chill Vibes</span>
-                        </div>
-                        <div class="playlist-item">
-                            <div class="playlist-icon">
-                                <i class="fas fa-music"></i>
-                            </div>
-                            <span>Workout Mix</span>
-                        </div>
-                        <div class="playlist-item">
-                            <div class="playlist-icon">
-                                <i class="fas fa-music"></i>
-                            </div>
-                            <span>Focus Flow</span>
-                        </div>
-                        <div class="playlist-item">
-                            <div class="playlist-icon">
-                                <i class="fas fa-music"></i>
-                            </div>
-                            <span>Road Trip</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<body class="text-white">
+
+    <!-- Header / Navigasi (Warna Hitam) -->
+    <header class="bg-gray-900 shadow-lg sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-extrabold text-blue-400 glow-effect">Mahameru.id</h1>
+            <nav class="space-x-4">
+                <a href="#tentang" class="text-gray-300 hover:text-blue-400 transition duration-300">Tentang</a>
+                <a href="#galeri" class="text-gray-300 hover:text-blue-400 transition duration-300">Galeri Puncak</a>
+                <a href="#akses" class="text-gray-300 hover:text-blue-400 transition duration-300">Akses</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Bagian Utama (Hero Section) - Foto Pemandangan -->
+    <section class="hero-section h-[70vh] flex items-center justify-center text-center p-4">
+        <div class="bg-black bg-opacity-50 p-8 rounded-xl max-w-2xl">
+            <h2 class="text-5xl font-extrabold mb-4 glow-effect">Puncak Para Dewa</h2>
+            <p class="text-xl mb-6 text-gray-200">Menjelajahi keindahan abadi Gunung Semeru, atap tertinggi di Pulau Jawa.</p>
             
-            <!-- Main Content -->
-            <div class="content">
-                <div class="content-header">
-                    <div class="navigation-buttons">
-                        <button class="nav-button">
-                            <i class="fas fa-chevron-left"></i>
-                        </button>
-                        <button class="nav-button">
-                            <i class="fas fa-chevron-right"></i>
-                        </button>
-                    </div>
-                    
-                    <div class="user-menu">
-                        <div class="user-avatar">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="user-name">User finSpotify</div>
-                        <div class="user-dropdown">
-                            <i class="fas fa-caret-down"></i>
-                        </div>
-                    </div>
+            <!-- Tombol Interaktif (Warna Biru) -->
+            <button onclick="showMessage('Anda menekan tombol Jelajahi!')"
+                    class="interactive-button bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition duration-300">
+                Jelajahi Sekarang
+            </button>
+        </div>
+    </section>
+
+    <!-- Bagian Tentang Mahameru (Warna Biru Tua/Hitam) -->
+    <section id="tentang" class="py-16 bg-[#1a202c]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="text-4xl font-bold text-center mb-10 text-blue-400">Tentang Gunung Semeru</h3>
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <img src="https://placehold.co/600x400/293b4e/ffffff?text=Ranukumbolo" 
+                         alt="Pemandangan Ranu Kumbolo" 
+                         class="rounded-xl shadow-2xl w-full h-auto object-cover transition duration-500 hover:scale-[1.02]">
+                    <p class="text-sm text-gray-400 mt-2 text-center">Ranu Kumbolo, surga di tengah pendakian.</p>
                 </div>
-                
-                <div class="hero-section">
-                    <div class="hero-image"></div>
-                    <div class="hero-info">
-                        <div class="hero-type">Playlist</div>
-                        <div class="hero-title">finSpotify Mix</div>
-                        <div class="hero-description">Dapatkan campuran lagu-lagu favorit Anda dan temukan musik baru setiap hari. Dibuat khusus untuk Anda.</div>
-                        <div class="hero-buttons">
-                            <button class="play-button">
-                                <i class="fas fa-play"></i>
-                                Putar
-                            </button>
-                            <button class="other-button">
-                                <i class="fas fa-heart"></i>
-                            </button>
-                            <button class="other-button">
-                                <i class="fas fa-ellipsis-h"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="section">
-                    <div class="section-header">
-                        <div class="section-title">Lagu yang sering diputar</div>
-                        <a href="#" class="section-link">Tampilkan semua</a>
-                    </div>
-                    <div class="cards-container">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="https://picsum.photos/seed/indonesia/180/180.jpg" alt="Top Hits Indonesia">
-                                <div class="play-overlay">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </div>
-                            <div class="card-title">Top Hits Indonesia</div>
-                            <div class="card-description">Lagu-lagu terpopuler dari artis Indonesia</div>
-                        </div>
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="https://picsum.photos/seed/rock/180/180.jpg" alt="Rock Classics">
-                                <div class="play-overlay">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </div>
-                            <div class="card-title">Rock Classics</div>
-                            <div class="card-description">Lagu rock legendaris dari masa lalu</div>
-                        </div>
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="https://picsum.photos/seed/jazz/180/180.jpg" alt="Jazz Lounge">
-                                <div class="play-overlay">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </div>
-                            <div class="card-title">Jazz Lounge</div>
-                            <div class="card-description">Musik jazz yang santai untuk malam hari</div>
-                        </div>
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="https://picsum.photos/seed/pop/180/180.jpg" alt="Pop Global">
-                                <div class="play-overlay">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </div>
-                            <div class="card-title">Pop Global</div>
-                            <div class="card-description">Lagu pop terbaru dari seluruh dunia</div>
-                        </div>
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="https://picsum.photos/seed/electronic/180/180.jpg" alt="Electronic Beats">
-                                <div class="play-overlay">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </div>
-                            <div class="card-title">Electronic Beats</div>
-                            <div class="card-description">Musik elektronik untuk energi Anda</div>
-                        </div>
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="https://picsum.photos/seed/rnb/180/180.jpg" alt="R&B Vibes">
-                                <div class="play-overlay">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </div>
-                            <div class="card-title">R&B Vibes</div>
-                            <div class="card-description">R&B modern dan klasik</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="section">
-                    <div class="section-header">
-                        <div class="section-title">Dibuat untuk Anda</div>
-                        <a href="#" class="section-link">Tampilkan semua</a>
-                    </div>
-                    <div class="cards-container">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="https://picsum.photos/seed/morning/180/180.jpg" alt="Morning Boost">
-                                <div class="play-overlay">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </div>
-                            <div class="card-title">Morning Boost</div>
-                            <div class="card-description">Lagu-lagu cerah untuk memulai hari</div>
-                        </div>
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="https://picsum.photos/seed/night/180/180.jpg" alt="Late Night">
-                                <div class="play-overlay">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </div>
-                            <div class="card-title">Late Night</div>
-                            <div class="card-description">Musik untuk malam yang tenang</div>
-                        </div>
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="https://picsum.photos/seed/workout/180/180.jpg" alt="Workout Power">
-                                <div class="play-overlay">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </div>
-                            <div class="card-title">Workout Power</div>
-                            <div class="card-description">Musik energik untuk sesi olahraga</div>
-                        </div>
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="https://picsum.photos/seed/study/180/180.jpg" alt="Study Focus">
-                                <div class="play-overlay">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </div>
-                            <div class="card-title">Study Focus</div>
-                            <div class="card-description">Musik instrumental untuk konsentrasi</div>
-                        </div>
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="https://picsum.photos/seed/road/180/180.jpg" alt="Road Trip">
-                                <div class="play-overlay">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </div>
-                            <div class="card-title">Road Trip</div>
-                            <div class="card-description">Playlist sempurna untuk perjalanan</div>
-                        </div>
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="https://picsum.photos/seed/coffee/180/180.jpg" alt="Coffee Shop">
-                                <div class="play-overlay">
-                                    <i class="fas fa-play"></i>
-                                </div>
-                            </div>
-                            <div class="card-title">Coffee Shop</div>
-                            <div class="card-description">Musik santai seperti di kedai kopi</div>
-                        </div>
-                    </div>
+                <div class="space-y-6">
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        Gunung Semeru, atau Mahameru, adalah gunung berapi tertinggi di Pulau Jawa dengan ketinggian 3.676 meter di atas permukaan laut. Pemandangan dari puncaknya menawarkan panorama tak tertandingi, terutama saat matahari terbit.
+                    </p>
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        Pendakiannya terkenal menantang, melewati Danau Ranu Kumbolo yang indah, padang Savana Oro-Oro Ombo, hingga jalur pasir curam menuju puncak Jonggring Saloka.
+                    </p>
+                    <button onclick="showMessage('Informasi lebih detail tentang Geologi Semeru.')"
+                            class="interactive-button bg-gray-700 hover:bg-gray-600 text-gray-200 font-medium py-2 px-6 rounded-lg transition duration-300 mt-4">
+                        Lihat Data Geologi
+                    </button>
                 </div>
             </div>
         </div>
-        
-        <!-- Player -->
-        <div class="player">
-            <div class="now-playing">
-                <div class="now-playing-image">
-                    <img src="https://picsum.photos/seed/nowplaying/56/56.jpg" alt="Now Playing">
-                </div>
-                <div class="now-playing-info">
-                    <div class="now-playing-title">Lagu Sedang Diputar</div>
-                    <div class="now-playing-artist">Artis</div>
-                </div>
-                <button class="control-button">
-                    <i class="far fa-heart"></i>
-                </button>
-            </div>
-            
-            <div class="player-controls">
-                <div class="now-playing-controls">
-                    <button class="control-button">
-                        <i class="fas fa-random"></i>
-                    </button>
-                    <button class="control-button">
-                        <i class="fas fa-step-backward"></i>
-                    </button>
-                    <button class="control-button main">
-                        <i class="fas fa-play"></i>
-                    </button>
-                    <button class="control-button">
-                        <i class="fas fa-step-forward"></i>
-                    </button>
-                    <button class="control-button">
-                        <i class="fas fa-redo"></i>
-                    </button>
-                </div>
-                <div class="progress-container">
-                    <div class="progress-time">0:45</div>
-                    <div class="progress-bar">
-                        <div class="progress"></div>
+    </section>
+
+    <!-- Galeri Puncak (Grid Foto) -->
+    <section id="galeri" class="py-16 bg-[#0d1117]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="text-4xl font-bold text-center mb-12 text-blue-400">Galeri Pemandangan Indah</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Foto 1: Puncak Mahameru -->
+                <div class="overflow-hidden rounded-xl shadow-xl group cursor-pointer">
+                    <img src="https://placehold.co/800x600/374151/ffffff?text=Puncak+Mahameru" 
+                         alt="Puncak Semeru" 
+                         class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500">
+                    <div class="p-4 bg-gray-800">
+                        <p class="text-lg font-semibold text-blue-300">Mahameru (3.676 mdpl)</p>
+                        <p class="text-sm text-gray-400">Pemandangan dari puncak Jonggring Saloka.</p>
                     </div>
-                    <div class="progress-time">2:30</div>
                 </div>
-            </div>
-            
-            <div class="player-extras">
-                <button class="extra-button">
-                    <i class="fas fa-list"></i>
-                </button>
-                <button class="extra-button">
-                    <i class="fas fa-desktop"></i>
-                </button>
-                <button class="extra-button">
-                    <i class="fas fa-volume-up"></i>
-                </button>
-                <div class="volume-container">
-                    <div class="volume-bar">
-                        <div class="volume"></div>
+                <!-- Foto 2: Oro-Oro Ombo -->
+                <div class="overflow-hidden rounded-xl shadow-xl group cursor-pointer">
+                    <img src="https://placehold.co/800x600/374151/ffffff?text=Oro-Oro+Ombo" 
+                         alt="Oro-Oro Ombo Savana" 
+                         class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500">
+                    <div class="p-4 bg-gray-800">
+                        <p class="text-lg font-semibold text-blue-300">Oro-Oro Ombo</p>
+                        <p class="text-sm text-gray-400">Padang savana yang luas dan memukau.</p>
+                    </div>
+                </div>
+                <!-- Foto 3: Tanjakan Cinta -->
+                <div class="overflow-hidden rounded-xl shadow-xl group cursor-pointer">
+                    <img src="https://placehold.co/800x600/374151/ffffff?text=Tanjakan+Cinta" 
+                         alt="Tanjakan Cinta" 
+                         class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500">
+                    <div class="p-4 bg-gray-800">
+                        <p class="text-lg font-semibold text-blue-300">Tanjakan Cinta</p>
+                        <p class="text-sm text-gray-400">Jalur mitos yang wajib dilewati.</p>
                     </div>
                 </div>
             </div>
+            
+            <!-- Tombol Aksi Galeri -->
+            <div class="text-center mt-12">
+                <button onclick="showMessage('Galeri sedang diperbarui dengan foto baru!')"
+                        class="interactive-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-10 rounded-full text-lg shadow-xl transition duration-300">
+                    Muat Lebih Banyak Foto
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bagian Akses dan Kontak -->
+    <section id="akses" class="py-16 bg-[#1a202c]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h3 class="text-4xl font-bold mb-8 text-blue-400">Rencana Perjalanan Anda</h3>
+            <p class="text-gray-300 mb-8 max-w-3xl mx-auto">
+                Untuk memulai perjalanan ke Semeru, Anda perlu mendaftar melalui situs resmi dan menyiapkan fisik yang prima.
+            </p>
+
+            <div class="flex flex-col md:flex-row justify-center gap-6">
+                <!-- Tombol Rute -->
+                <button onclick="showMessage('Rute pendakian akan ditunjukkan.')"
+                        class="interactive-button bg-blue-800 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg flex-1 md:max-w-xs transition duration-300">
+                    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    Lihat Peta Rute
+                </button>
+                <!-- Tombol Kontak -->
+                <button onclick="showMessage('Hubungi kami melalui email: info@mahameru.id')"
+                        class="interactive-button bg-gray-700 hover:bg-gray-600 text-gray-200 font-semibold py-3 px-6 rounded-lg flex-1 md:max-w-xs transition duration-300">
+                    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-2 4v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path></svg>
+                    Kontak Pengelola
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-8 mt-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500">
+            <p>&copy; 2025 Mahameru.id. Hak Cipta Dilindungi.</p>
+            <p class="text-sm mt-2">Dibuat dengan cinta untuk para pendaki.</p>
+        </div>
+    </footer>
+
+    <!-- Modal Pesan Custom (Pengganti alert()) -->
+    <div id="message-modal" class="fixed inset-0 bg-black bg-opacity-75 hidden items-center justify-center z-50">
+        <div class="bg-gray-800 p-6 rounded-xl shadow-2xl max-w-sm w-full border border-blue-500">
+            <h4 class="text-xl font-bold mb-4 text-blue-400">Pesan Interaktif</h4>
+            <p id="modal-content" class="text-gray-200 mb-6"></p>
+            <button onclick="closeModal()" 
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg w-full transition duration-300">
+                Tutup
+            </button>
         </div>
     </div>
 
     <script>
-        // Add interactivity to the play button
-        document.querySelector('.play-button').addEventListener('click', function() {
-            const icon = this.querySelector('i');
-            if (icon.classList.contains('fa-play')) {
-                icon.classList.remove('fa-play');
-                icon.classList.add('fa-pause');
-                this.innerHTML = '<i class="fas fa-pause"></i> Jeda';
-            } else {
-                icon.classList.remove('fa-pause');
-                icon.classList.add('fa-play');
-                this.innerHTML = '<i class="fas fa-play"></i> Putar';
-            }
-        });
+        // Fungsi untuk menampilkan modal custom (pengganti alert)
+        const modal = document.getElementById('message-modal');
+        const modalContent = document.getElementById('modal-content');
 
-        // Add interactivity to the main player play button
-        document.querySelector('.control-button.main').addEventListener('click', function() {
-            const icon = this.querySelector('i');
-            if (icon.classList.contains('fa-play')) {
-                icon.classList.remove('fa-play');
-                icon.classList.add('fa-pause');
-            } else {
-                icon.classList.remove('fa-pause');
-                icon.classList.add('fa-play');
-            }
-        });
+        function showMessage(message) {
+            modalContent.textContent = message;
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
 
-        // Add interactivity to the like button
-        document.querySelector('.control-button').addEventListener('click', function() {
-            const icon = this.querySelector('i');
-            if (icon.classList.contains('far')) {
-                icon.classList.remove('far');
-                icon.classList.add('fas');
-                icon.style.color = '#1DB954';
-            } else {
-                icon.classList.remove('fas');
-                icon.classList.add('far');
-                icon.style.color = '';
-            }
-        });
+        function closeModal() {
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
 
-        // Add interactivity to the progress bar
-        document.querySelector('.progress-bar').addEventListener('click', function(e) {
-            const progress = document.querySelector('.progress');
-            const clickX = e.offsetX;
-            const width = this.offsetWidth;
-            const percentage = (clickX / width) * 100;
-            progress.style.width = percentage + '%';
-        });
-
-        // Add interactivity to the volume bar
-        document.querySelector('.volume-bar').addEventListener('click', function(e) {
-            const volume = document.querySelector('.volume');
-            const clickX = e.offsetX;
-            const width = this.offsetWidth;
-            const percentage = (clickX / width) * 100;
-            volume.style.width = percentage + '%';
-        });
-
-        // Add interactivity to the nav items
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelectorAll('.nav-item').forEach(navItem => {
-                    navItem.classList.remove('active');
-                });
-                this.classList.add('active');
-            });
-        });
-
-        // Add interactivity to the cards
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('click', function() {
-                // Simulate playing a track when a card is clicked
-                const title = this.querySelector('.card-title').textContent;
-                const description = this.querySelector('.card-description').textContent;
-                const imageSrc = this.querySelector('img').src;
-                
-                document.querySelector('.now-playing-title').textContent = title;
-                document.querySelector('.now-playing-artist').textContent = description;
-                document.querySelector('.now-playing-image img').src = imageSrc.replace('180/180', '56/56');
-                
-                // Change the play button to pause
-                const playerButton = document.querySelector('.control-button.main i');
-                playerButton.classList.remove('fa-play');
-                playerButton.classList.add('fa-pause');
-            });
-        });
+        // Karena saya tidak bisa mengakses foto real-time dari Semeru,
+        // saya menggunakan placeholder image dengan teks yang relevan.
+        // Di aplikasi nyata, Anda akan mengganti URL placeholder ini
+        // dengan URL foto pemandangan Semeru yang sebenarnya.
+        document.querySelector('.hero-section').style.backgroundImage = "url('https://placehold.co/1920x1080/101a2c/ffffff?text=Pemandangan+Mahameru+Indah')";
     </script>
 </body>
 </html>
