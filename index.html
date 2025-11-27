@@ -3,198 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keindahan Mahameru (Gunung Semeru)</title>
+    <title>Gunung Mahameru (Semeru) - Keindahan Abadi</title>
     <!-- Memuat Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Menggunakan font Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Mengatur font agar lebih modern dan mudah dibaca */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap');
+        /* Gaya kustom untuk memastikan latar belakang hitam dan teks terang */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0d1117; /* Biru sangat gelap / Hitam */
+            background-color: #0d1117; /* Hampir hitam */
+            color: #e5e7eb; /* Putih keabu-abuan untuk teks */
         }
-        .hero-section {
-            background-image: url('https://placehold.co/1200x800/1e293b/ffffff?text=Gunung+Semeru'); /* Placeholder foto pemandangan Semeru */
-            background-size: cover;
-            background-position: center;
-        }
-        .interactive-button {
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-        }
-        .interactive-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
-        }
-        .glow-effect {
-            text-shadow: 0 0 5px rgba(59, 130, 246, 0.7); /* Efek cahaya biru */
+        .text-blue-500 {
+            color: #3b82f6; /* Biru cerah untuk aksen */
         }
     </style>
 </head>
-<body class="text-white">
+<body class="antialiased">
 
-    <!-- Header / Navigasi (Warna Hitam) -->
-    <header class="bg-gray-900 shadow-lg sticky top-0 z-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-extrabold text-blue-400 glow-effect">Mahameru.id</h1>
-            <nav class="space-x-4">
-                <a href="#tentang" class="text-gray-300 hover:text-blue-400 transition duration-300">Tentang</a>
-                <a href="#galeri" class="text-gray-300 hover:text-blue-400 transition duration-300">Galeri Puncak</a>
-                <a href="#akses" class="text-gray-300 hover:text-blue-400 transition duration-300">Akses</a>
+    <!-- Header / Navbar -->
+    <header class="bg-black shadow-lg sticky top-0 z-10">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-3xl font-extrabold text-blue-500 tracking-wider">MAHAMERU</h1>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#keindahan" class="hover:text-blue-400 transition duration-300">Keindahan</a>
+                <a href="#pemandangan" class="hover:text-blue-400 transition duration-300">Pemandangan</a>
+                <a href="#pendakian" class="hover:text-blue-400 transition duration-300">Jalur Pendakian</a>
             </nav>
+            <button class="md:hidden p-2 rounded-lg hover:bg-gray-800 transition duration-300">
+                <!-- Icon Menu (Lucide-react fallback using SVG) -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
         </div>
     </header>
 
-    <!-- Bagian Utama (Hero Section) - Foto Pemandangan -->
-    <section class="hero-section h-[70vh] flex items-center justify-center text-center p-4">
-        <div class="bg-black bg-opacity-50 p-8 rounded-xl max-w-2xl">    
-            <!-- Tombol Interaktif (Warna Biru) -->
-            <button onclick="showMessage('Anda menekan tombol Jelajahi!')                  
-            </button>
-        </div>
-    </section>
-
-    <!-- Bagian Tentang Mahameru (Warna Biru Tua/Hitam) -->
-    <section id="tentang" class="py-16 bg-[#1a202c]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h3 class="text-4xl font-bold text-center mb-10 text-blue-400">Tentang Gunung Semeru</h3>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <img src="https://placehold.co/600x400/293b4e/ffffff?text=Ranukumbolo" 
-                         alt="Pemandangan Ranu Kumbolo" 
-                         class="rounded-xl shadow-2xl w-full h-auto object-cover transition duration-500 hover:scale-[1.02]">
-                    <p class="text-sm text-gray-400 mt-2 text-center">Ranu Kumbolo, surga di tengah pendakian.</p>
-                </div>
-                <div class="space-y-6">
-                    <p class="text-gray-300 text-lg leading-relaxed">
-                        Gunung Semeru, atau Mahameru, adalah gunung berapi tertinggi di Pulau Jawa dengan ketinggian 3.676 meter di atas permukaan laut. Pemandangan dari puncaknya menawarkan panorama tak tertandingi, terutama saat matahari terbit.
-                    </p>
-                    <p class="text-gray-300 text-lg leading-relaxed">
-                        Pendakiannya terkenal menantang, melewati Danau Ranu Kumbolo yang indah, padang Savana Oro-Oro Ombo, hingga jalur pasir curam menuju puncak Jonggring Saloka.
-                    </p>
-                    <button onclick="showMessage('Informasi lebih detail tentang Geologi Semeru.')"
-                            class="interactive-button bg-gray-700 hover:bg-gray-600 text-gray-200 font-medium py-2 px-6 rounded-lg transition duration-300 mt-4">
-                        Lihat Data Geologi
-                    </button>
-                </div>
+    <!-- Bagian Utama / Hero -->
+    <main class="py-12 md:py-20">
+        <section class="container mx-auto px-4 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-5xl md:text-7xl font-black mb-4 leading-tight">
+                    Puncak Jawa: <span class="text-blue-500">Gunung Semeru</span>
+                </h2>
+                <p class="text-lg md:text-xl text-gray-400 mb-8">
+                    Mahameru, 3.676 mdpl. Saksi bisu keindahan alam Jawa Timur.
+                </p>
+                <a href="#keindahan" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition duration-300 transform hover:scale-105">
+                    Jelajahi Keajaiban Alam
+                </a>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Galeri Puncak (Grid Foto) -->
-    <section id="galeri" class="py-16 bg-[#0d1117]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h3 class="text-4xl font-bold text-center mb-12 text-blue-400">Galeri Pemandangan Indah</h3>
+        <!-- Galeri Gambar Pemandangan -->
+        <section id="galeri" class="container mx-auto px-4 mt-16 md:mt-24">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Foto 1: Puncak Mahameru -->
-                <div class="overflow-hidden rounded-xl shadow-xl group cursor-pointer">
-                    <img src="https://placehold.co/800x600/374151/ffffff?text=Puncak+Mahameru" 
-                         alt="Puncak Semeru" 
-                         class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500">
-                    <div class="p-4 bg-gray-800">
-                        <p class="text-lg font-semibold text-blue-300">Mahameru (3.676 mdpl)</p>
-                        <p class="text-sm text-gray-400">Pemandangan dari puncak Jonggring Saloka.</p>
+                <!-- Gambar 1: Ranu Kumbolo -->
+                <div class="rounded-xl overflow-hidden shadow-2xl transition duration-500 hover:shadow-blue-500/50">
+                    <img src="https://placehold.co/800x600/1e293b/ffffff?text=Ranu+Kumbolo"
+                         alt="Danau Ranu Kumbolo dengan latar belakang perbukitan hijau"
+                         class="w-full h-64 object-cover transform hover:scale-105 transition duration-500"
+                         loading="lazy">
+                    <div class="p-4 bg-gray-900">
+                        <h3 class="text-xl font-semibold text-blue-300">Danau Ranu Kumbolo</h3>
+                        <p class="text-sm text-gray-400">Oasis di ketinggian, tempat istirahat pendaki yang menenangkan.</p>
                     </div>
                 </div>
-                <!-- Foto 2: Oro-Oro Ombo -->
-                <div class="overflow-hidden rounded-xl shadow-xl group cursor-pointer">
-                    <img src="https://placehold.co/800x600/374151/ffffff?text=Oro-Oro+Ombo" 
-                         alt="Oro-Oro Ombo Savana" 
-                         class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500">
-                    <div class="p-4 bg-gray-800">
-                        <p class="text-lg font-semibold text-blue-300">Oro-Oro Ombo</p>
-                        <p class="text-sm text-gray-400">Padang savana yang luas dan memukau.</p>
+                <!-- Gambar 2: Pemandangan Puncak Mahameru -->
+                <div class="rounded-xl overflow-hidden shadow-2xl transition duration-500 hover:shadow-blue-500/50">
+                    <img src="https://placehold.co/800x600/1e293b/ffffff?text=Kawah+Jonggring+Saloko"
+                         alt="Puncak Mahameru dan Kawah Jonggring Saloko"
+                         class="w-full h-64 object-cover transform hover:scale-105 transition duration-500"
+                         loading="lazy">
+                    <div class="p-4 bg-gray-900">
+                        <h3 class="text-xl font-semibold text-blue-300">Kawah Jonggring Saloko</h3>
+                        <p class="text-sm text-gray-400">Puncak abadi yang selalu mengeluarkan asap belerang.</p>
                     </div>
                 </div>
-                <!-- Foto 3: Tanjakan Cinta -->
-                <div class="overflow-hidden rounded-xl shadow-xl group cursor-pointer">
-                    <img src="https://placehold.co/800x600/374151/ffffff?text=Tanjakan+Cinta" 
-                         alt="Tanjakan Cinta" 
-                         class="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500">
-                    <div class="p-4 bg-gray-800">
-                        <p class="text-lg font-semibold text-blue-300">Tanjakan Cinta</p>
-                        <p class="text-sm text-gray-400">Jalur mitos yang wajib dilewati.</p>
+                <!-- Gambar 3: Savana Oro-oro Ombo -->
+                <div class="rounded-xl overflow-hidden shadow-2xl transition duration-500 hover:shadow-blue-500/50">
+                    <img src="https://placehold.co/800x600/1e293b/ffffff?text=Oro-oro+Ombo"
+                         alt="Padang Savana Oro-oro Ombo yang luas"
+                         class="w-full h-64 object-cover transform hover:scale-105 transition duration-500"
+                         loading="lazy">
+                    <div class="p-4 bg-gray-900">
+                        <h3 class="text-xl font-semibold text-blue-300">Savana Oro-oro Ombo</h3>
+                        <p class="text-sm text-gray-400">Padang rumput luas yang diselimuti bunga Lavender.</p>
                     </div>
                 </div>
             </div>
-            
-            <!-- Tombol Aksi Galeri -->
-            <div class="text-center mt-12">
-                <button onclick="showMessage('Galeri sedang diperbarui dengan foto baru!')"
-                        class="interactive-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-10 rounded-full text-lg shadow-xl transition duration-300">
-                    Muat Lebih Banyak Foto
-                </button>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Bagian Akses dan Kontak -->
-    <section id="akses" class="py-16 bg-[#1a202c]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h3 class="text-4xl font-bold mb-8 text-blue-400">Rencana Perjalanan Anda</h3>
-            <p class="text-gray-300 mb-8 max-w-3xl mx-auto">
-                Untuk memulai perjalanan ke Semeru, Anda perlu mendaftar melalui situs resmi dan menyiapkan fisik yang prima.
-            </p>
-
-            <div class="flex flex-col md:flex-row justify-center gap-6">
-                <!-- Tombol Rute -->
-                <button onclick="showMessage('Rute pendakian akan ditunjukkan.')"
-                        class="interactive-button bg-blue-800 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg flex-1 md:max-w-xs transition duration-300">
-                    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    Lihat Peta Rute
-                </button>
-                <!-- Tombol Kontak -->
-                <button onclick="showMessage('Hubungi kami melalui email: info@mahameru.id')"
-                        class="interactive-button bg-gray-700 hover:bg-gray-600 text-gray-200 font-semibold py-3 px-6 rounded-lg flex-1 md:max-w-xs transition duration-300">
-                    <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-2 4v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path></svg>
-                    Kontak Pengelola
-                </button>
+        <!-- Bagian Keindahan Alam (Tentang Mahameru) -->
+        <section id="keindahan" class="container mx-auto px-4 mt-20 md:mt-32">
+            <h3 class="text-4xl font-bold text-center text-blue-500 mb-12">Keindahan Mahameru yang Abadi</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- Konten Teks -->
+                <div>
+                    <h4 class="text-2xl font-semibold mb-4">Misteri dan Keagungan</h4>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Gunung Semeru, atau Mahameru yang berarti "Gunung Agung", adalah gunung berapi tertinggi di Pulau Jawa. Keagungannya tak tertandingi, menarik ribuan pendaki setiap tahun untuk menyaksikan keindahan matahari terbit dari puncaknya. Meskipun merupakan gunung berapi aktif, pesonanya terletak pada kontras antara lanskap yang subur dan puncaknya yang berbatu.
+                    </p>
+                    <h4 class="text-2xl font-semibold mb-4">Flora dan Fauna Endemik</h4>
+                    <p class="text-gray-400 leading-relaxed">
+                        Kawasan Taman Nasional Bromo Tengger Semeru menawarkan keanekaragaman hayati yang luar biasa. Anda dapat menemukan edelweis Jawa, bunga abadi yang tumbuh di padang savana, serta berbagai jenis burung dan mamalia. Ekosistemnya yang unik menjadikan setiap langkah pendakian sebagai pengalaman yang mendalam dengan alam.
+                    </p>
+                </div>
+                <!-- Gambar Samping -->
+                <div class="rounded-xl overflow-hidden shadow-2xl">
+                    <img src="https://placehold.co/1200x800/0f172a/93c5fd?text=Keindahan+Semeru"
+                         alt="Pemandangan luas Gunung Semeru dari kejauhan"
+                         class="w-full h-80 object-cover rounded-xl"
+                         loading="lazy">
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Bagian Pemandangan Kunci -->
+        <section id="pemandangan" class="container mx-auto px-4 mt-20 md:mt-32">
+            <h3 class="text-4xl font-bold text-center text-blue-500 mb-12">Pemandangan Kunci</h3>
+            <div class="space-y-12">
+                <!-- Pemandangan 1: Tanjakan Cinta -->
+                <div class="md:flex items-center bg-gray-900 p-6 rounded-xl shadow-xl hover:shadow-blue-900/50 transition duration-300">
+                    <img src="https://placehold.co/400x300/374151/ffffff?text=Tanjakan+Cinta"
+                         alt="Jalur pendakian Tanjakan Cinta yang curam"
+                         class="w-full md:w-1/3 h-48 md:h-64 object-cover rounded-lg mb-4 md:mb-0 md:mr-6"
+                         loading="lazy">
+                    <div>
+                        <h4 class="text-3xl font-bold text-blue-400 mb-2">Tanjakan Cinta</h4>
+                        <p class="text-gray-400 leading-relaxed">
+                            Sebuah bukit curam yang legendaris menuju Ranu Kumbolo. Mitosnya, jika Anda berhasil melewatinya tanpa menoleh ke belakang sambil memikirkan orang yang dicintai, cinta Anda akan abadi. Pemandangannya yang dikelilingi perbukitan hijau sungguh memukau.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Pemandangan 2: Kalimati -->
+                <div class="md:flex flex-row-reverse items-center bg-gray-900 p-6 rounded-xl shadow-xl hover:shadow-blue-900/50 transition duration-300">
+                    <img src="https://placehold.co/400x300/374151/ffffff?text=Arca+Jemplang"
+                         alt="Area berkemah Kalimati dengan pemandangan gunung"
+                         class="w-full md:w-1/3 h-48 md:h-64 object-cover rounded-lg mb-4 md:mb-0 md:ml-6"
+                         loading="lazy">
+                    <div>
+                        <h4 class="text-3xl font-bold text-blue-400 mb-2">Cemoro Kandang & Kalimati</h4>
+                        <p class="text-gray-400 leading-relaxed">
+                            Posisi ideal untuk berkemah sebelum melakukan *summit attack*. Kalimati menawarkan panorama pegunungan yang luas dengan latar belakang puncak Semeru yang gagah. Di sini, langit malam bertabur bintang tampak begitu dekat.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <!-- Bagian Informasi Pendakian -->
+        <section id="pendakian" class="container mx-auto px-4 mt-20 md:mt-32">
+            <h3 class="text-4xl font-bold text-center text-blue-500 mb-12">Persiapan Pendakian</h3>
+            <div class="bg-black p-8 rounded-xl shadow-2xl border border-blue-900/50">
+                <p class="text-lg text-gray-300 mb-6">
+                    Pendakian ke Mahameru adalah tantangan yang memerlukan persiapan fisik dan mental yang matang. Jalur resmi dimulai dari Ranu Pani.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="p-4 bg-gray-800 rounded-lg">
+                        <h5 class="text-xl font-semibold text-blue-400 mb-2">1. Izin Resmi</h5>
+                        <p class="text-sm text-gray-400">Wajib melakukan booking online melalui situs resmi TNBTS untuk mendapatkan tiket masuk.</p>
+                    </div>
+                    <div class="p-4 bg-gray-800 rounded-lg">
+                        <h5 class="text-xl font-semibold text-blue-400 mb-2">2. Perlengkapan</h5>
+                        <p class="text-sm text-gray-400">Siapkan perlengkapan musim dingin yang memadai, termasuk jaket tebal, sarung tangan, dan tenda yang kokoh.</p>
+                    </div>
+                    <div class="p-4 bg-gray-800 rounded-lg">
+                        <h5 class="text-xl font-semibold text-blue-400 mb-2">3. Waktu Terbaik</h5>
+                        <p class="text-sm text-gray-400">Musim kemarau (Juni-Agustus) adalah waktu terbaik dengan cuaca yang cerah, meskipun sangat dingin.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 py-8 mt-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-500">
-            <p>&copy; 2025 Mahameru.id. Hak Cipta Dilindungi.</p>
-            <p class="text-sm mt-2">Dibuat dengan cinta untuk para pendaki.</p>
+    <footer class="mt-20 py-8 bg-black border-t border-blue-900/50">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-500 text-sm">
+                &copy; 2025 Gunung Mahameru. Semua alam adalah milik kita bersama. <span class="text-blue-500">Jaga kebersihan.</span>
+            </p>
         </div>
     </footer>
 
-    <!-- Modal Pesan Custom (Pengganti alert()) -->
-    <div id="message-modal" class="fixed inset-0 bg-black bg-opacity-75 hidden items-center justify-center z-50">
-        <div class="bg-gray-800 p-6 rounded-xl shadow-2xl max-w-sm w-full border border-blue-500">
-            <h4 class="text-xl font-bold mb-4 text-blue-400">Pesan Interaktif</h4>
-            <p id="modal-content" class="text-gray-200 mb-6"></p>
-            <button onclick="closeModal()" 
-                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg w-full transition duration-300">
-                Tutup
-            </button>
-        </div>
-    </div>
-
-    <script>
-        // Fungsi untuk menampilkan modal custom (pengganti alert)
-        const modal = document.getElementById('message-modal');
-        const modalContent = document.getElementById('modal-content');
-
-        function showMessage(message) {
-            modalContent.textContent = message;
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-        }
-
-        function closeModal() {
-            modal.classList.remove('flex');
-            modal.classList.add('hidden');
-        }
-
-        // Karena saya tidak bisa mengakses foto real-time dari Semeru,
-        // saya menggunakan placeholder image dengan teks yang relevan.
-        // Di aplikasi nyata, Anda akan mengganti URL placeholder ini
-        // dengan URL foto pemandangan Semeru yang sebenarnya.
-        document.querySelector('.hero-section').style.backgroundImage = "url('https://placehold.co/1920x1080/101a2c/ffffff?text=Pemandangan+Mahameru+Indah')";
-    </script>
 </body>
 </html>
-
